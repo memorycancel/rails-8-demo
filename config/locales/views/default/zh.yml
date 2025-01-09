@@ -1,0 +1,4 @@
+zh:
+  time:
+    formats:
+      short: "%Y年%M月%D日: %H%M%S"
