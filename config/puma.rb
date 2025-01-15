@@ -27,7 +27,11 @@
 threads_count = ENV.fetch("RAILS_MAX_THREADS", 1)
 threads threads_count, threads_count
 
-workers `nproc`.to_i * 1.5
+# for production
+# workers `nproc`.to_i * 1.5
+
+# for development
+workers 1
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port ENV.fetch("PORT", 3000)
