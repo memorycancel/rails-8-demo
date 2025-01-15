@@ -3,7 +3,12 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all.with_rich_text_content_and_embeds
+    begin
+      @posts = Post.all.with_rich_text_content_and_embeds
+      raise "this is a test unexpected error"
+    rescue => e
+      Rails.logger.error("ERROR Time: #{Time.now} #{e}")
+    end
   end
 
   # GET /posts/1 or /posts/1.json
