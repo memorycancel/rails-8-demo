@@ -2,12 +2,19 @@ require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @post = posts(:one)
+    @post = posts(:post_one)
+    @user = users(:one)
+    login_as @user
   end
 
   test "should get index" do
-    get posts_url
+    # get posts_url
+    get posts_url, headers: { "Content-Type": "text/plain", "HTTP_REFERER": "http://example.com/posts" }
     assert_response :success
+
+    assert_equal "index", @controller.action_name
+    # assert_equal "application/x-www-form-urlencoded", @request.media_type
+    assert_match "Post", @response.body
   end
 
   test "should get new" do
@@ -20,7 +27,8 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       post posts_url, params: { post: { body: @post.body, title: @post.title } }
     end
 
-    assert_redirected_to post_url(Post.last)
+    assert_redirected_to post_url(Post.last, locale: 'zh') # 测试 locale： 默认会变成 zh
+    assert_equal "Post was successfully created.", flash[:notice] # 测试flash
   end
 
   test "should show post" do
@@ -35,7 +43,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update post" do
     patch post_url(@post), params: { post: { body: @post.body, title: @post.title } }
-    assert_redirected_to post_url(@post)
+    assert_redirected_to post_url(@post, locale: 'zh')
   end
 
   test "should destroy post" do
@@ -43,6 +51,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       delete post_url(@post)
     end
 
-    assert_redirected_to posts_url
+    assert_redirected_to posts_url(locale: 'zh')
   end
 end
