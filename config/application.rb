@@ -26,5 +26,8 @@ module RailsSolid
     # config.i18n.load_path += Dir[Rails.root.join("my", "locales", "*.{rb,yml}")]
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.default_locale = :zh # 中文
+    config.action_mailer.default_url_options = { host: "example.com" }
+    config.action_mailer.asset_host = "http://example.com"
+    config.action_mailer.preview_paths << "#{Rails.root}/lib/mailer_previews"
   end
 end
