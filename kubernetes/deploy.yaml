@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rails-8-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rails-8-demo
+  template:
+    metadata:
+      labels:
+        app: rails-8-demo
+    spec:
+      volumes:
+        - name: sqlite-data
+          emptyDir: {}
+      containers:
+        - name: rails-8-demo
+          image: 192.168.0.100:5000/memorycancel/rails-8-demo
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /rails/storage
+          env:
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: rails-master-key
+                  name: rails-master-key
+          ports:
+            - containerPort: 3000
+      initContainers:
+        - name: rails-8-demo-solid
+          image: 192.168.0.100:5000/memorycancel/rails-8-demo/rails_solid
+          restartPolicy: Always
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /rails/storage
+          env:
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: rails-master-key
+                  name: rails-master-key
+          command:
+            - /rails/bin/jobs
+            - start
