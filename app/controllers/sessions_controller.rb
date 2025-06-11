@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
       UserMailer.with(user: @user).welcome_email.deliver_later
       redirect_to after_authentication_url
     else
-      redirect_to new_session_path, alert: "Try another email address or password."
+      flash[:alert] = "Try another email address or password."
+      redirect_to new_session_path
     end
   end
 
