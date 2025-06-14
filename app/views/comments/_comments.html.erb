@@ -1,5 +1,4 @@
-<h2><%= t :comments %></h2>
 <div id="comments">
   <%= render partial:post.comments %>
 </div>
-<%= render "comments/new", post: post %>
+<%= turbo_frame_tag "new_comment", src: new_post_comment_path(post), target: "_top" %>
