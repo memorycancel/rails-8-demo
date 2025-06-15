@@ -1,4 +1,8 @@
 <div id="<%= dom_id(comment) %>">
   <%= comment.content %> -
   <%= time_tag comment.updated_at, "data-local": "time-ago" %>
+  <%= link_to 'remove',
+    post_comment_path(comment.post, comment),
+    data: { turbo: true, turbo_method: :delete },
+    "data-turbo-frame": "_top" %>
 </div>
