@@ -31,7 +31,7 @@ threads threads_count, threads_count
 # workers `nproc`.to_i * 1.5
 
 # for development
-workers 2
+workers 0
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port ENV.fetch("PORT", 3000)

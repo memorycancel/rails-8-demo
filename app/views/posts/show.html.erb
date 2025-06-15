@@ -1,14 +1,13 @@
 <%= turbo_stream_from @post %>
-<p style="color: green"><%= notice %></p>
+<p><%= notice %></p>
 
-<%= render @post %>
-
-<div>
+<%= turbo_frame_tag "post_show_edit" do %>
+  <%= render @post %>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
+  <%= link_to "Back to posts", posts_path, "data-turbo-frame": "_top" %>
+  <%= button_to "Destroy this post", @post, method: :delete, "data-turbo-frame": "_top"  %>
+<% end %>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
-</div>
 <% cache @post do %>
   <%= render "comments/comments", post: @post %>
 <% end %>
