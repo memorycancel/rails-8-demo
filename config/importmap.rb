@@ -8,3 +8,7 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "local-time" # @3.0.3
+pin "bootstrap" # @5.3.6
+# 执行 bin/importmap pin bootstrap 后，popperjs 有 bug
+# 参考：https://github.com/rails/importmap-rails/issues/65
+pin "@popperjs/core", to: "stupid-popper-lib-2024.js"
