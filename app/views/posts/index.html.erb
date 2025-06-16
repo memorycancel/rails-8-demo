@@ -1,10 +1,15 @@
-<%= turbo_stream_from "posts" %>
+<%# 订阅新增 %>
+<%= turbo_stream_from 'posts' %>
+<%# 订阅每条post的删除和修改 %>
+<% @posts.each do |post| %>
+  <%= turbo_stream_from post %>
+<% end %>
 
 <p><%= notice %></p>
 
 <% content_for :title, "Posts" %>
 
-<h1><%= t :posts %></h1>
+<h1><%= t :posts %></h1><span>(<%= @posts.count %>)</span>
 
 <div id="posts">
   <ul>
