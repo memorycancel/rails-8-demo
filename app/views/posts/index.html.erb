@@ -24,3 +24,8 @@
 <%# <div class="wtf"><h2>asd</h2></div> %>
 
 <%= link_to "New post", new_post_path %>
+
+<div data-controller="hello">
+  <input data-hello-target="name" type="text">
+  <button data-action="click->hello#greet">Greet</button>
+</div>
