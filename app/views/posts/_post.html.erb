@@ -1,7 +1,10 @@
 <div id="<%= dom_id post %>">
   <p>
     <strong>Title:</strong>
-    <%= post.title %>
+    <div data-controller="clipboard">
+      <input data-clipboard-target="source" type="text" value="<%= post.title %>" readonly>
+      <button data-action="clipboard#copy">Copy to Clipboard</button>
+    </div>
   </p>
 
   <p>
