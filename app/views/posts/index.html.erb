@@ -1,24 +1,12 @@
-<%# 订阅新增 %>
-<%= turbo_stream_from 'posts' %>
-<%# 订阅每条post的删除和修改 %>
-<% @posts.each do |post| %>
-  <%= turbo_stream_from post %>
-<% end %>
-
 <p><%= notice %></p>
 
 <% content_for :title, "Posts" %>
 
-<h1><%= t :posts %></h1><span>(<%= @posts.count %>)</span>
+<h1><%= t :posts %></h1>
 
-<div id="posts">
-  <ul>
-    <% @posts.each do |post| %>
-      <% cache post do %>
-        <li><%= link_to post.title, post_path(post) %></li>
-      <% end %>
-    <% end %>
-  </ul>
+<div data-controller="content-loader"
+     data-content-loader-url-value="posts/list"
+     data-content-loader-refresh-interval-value="1000">
 </div>
 
 <%# <div class="wtf"><h2>asd</h2></div> %>

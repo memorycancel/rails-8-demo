@@ -1,0 +1,10 @@
+<span>(<%= @posts.count %>)</span>
+<div id="posts">
+  <ul>
+    <% @posts.each do |post| %>
+      <% cache post do %>
+        <li><%= link_to post.title, post_path(post) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

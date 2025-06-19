@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
-  
+
   resources :posts do
+    collection do
+      get "list"
+    end
     resources :comments
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
