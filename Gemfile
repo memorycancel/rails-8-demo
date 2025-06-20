@@ -62,3 +62,7 @@ group :test do
   gem "selenium-webdriver"
 end
 gem "mission_control-jobs"
+
+# Signet is a google OAuth 1.0 / OAuth 2.0 implementation.
+gem 'signet', '~> 0.20.0'
+gem 'google-apis-oauth2_v2'

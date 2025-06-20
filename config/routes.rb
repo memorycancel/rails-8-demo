@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "posts#index"
   mount MissionControl::Jobs::Engine, at: "/jobs"
+
+  post 'oauth/call' => "oauth#call"
+  get 'oauth/google_callback' => "oauth#google_callback"
 end

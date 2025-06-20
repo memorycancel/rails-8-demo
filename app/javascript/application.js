@@ -9,3 +9,9 @@ import LocalTime from "local-time"
 LocalTime.start()
 
 import * as bootstrap from "bootstrap";
+
+// https://github.com/hotwired/turbo-rails/issues/483
+Turbo.StreamActions.redirect_to = function () {
+  const url = this.getAttribute('url') || '/'
+  Turbo.visit(url)
+}
