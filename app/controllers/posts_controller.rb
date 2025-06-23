@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 
   def list
     @posts = Post.all.with_rich_text_content_and_embeds
+    render "list", layout: false
   end
 
   # GET /posts/1 or /posts/1.json
